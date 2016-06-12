@@ -1,0 +1,74 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Update Setting{% endblock %}
+
+{% block currentPage %}settings{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/settings.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <span class="hidden" id="current-mode">update</span>
+    <span class="hidden" id="current-id">{{ setting.id }}</span>
+
+    <style type="text/css" media="screen">
+        #c-value-editor {
+            height: 200px;
+        }
+    </style>
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h3 class="panel-title">Update Setting '{{ setting.settingKey }}'</h3>
+        </div>
+        <div class="panel-body">
+
+            <form method="post" id="form-setting">
+                <div class="form-group">
+                    <label for="input-key">Key</label>
+                    <input type="text"
+                        class="form-control"
+                        id="input-key"
+                        placeholder="Key"
+                        name="key"
+                        value="{{ setting.settingKey }}">
+                </div>
+
+                <div class="form-group" id="fg-nodeep">
+                    <label for="input-value">Value</label>
+                    <input type="text"
+                        class="form-control"
+                        id="input-value"
+                        placeholder="Value"
+                        name="value"
+                        value="{{ setting.settingValue }}">
+                </div>
+
+                <div class="form-group" id="fg-deep">
+                    <label for="input-value">Complex Value</label>
+                    <div id="c-value-editor">{{ setting.settingValue }}</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Options</label>
+                    <div class="checkbox">
+                        <label>
+                            <input id="cb-deep" type="checkbox" data-toggle="toggle"
+                                {% if setting.isDeep|default(false) %}checked{% endif %}> Complex Value?
+                        </label>
+                    </div>
+                </div>
+
+                <input type="hidden" value="{{ setting.isDeep|default('false') }}" name="deep">
+                <input type="hidden" value="1" name="sent">
+
+                <button type="submit" class="btn btn-warning">Save</button>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

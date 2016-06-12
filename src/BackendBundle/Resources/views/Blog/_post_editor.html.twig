@@ -1,0 +1,105 @@
+<!-- editor styles -->
+<link href="{{ asset('assets/vendor/selectize/dist/css/selectize.bootstrap3.css') }}" rel="stylesheet">
+
+<!-- editor js -->
+<script src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('assets/vendor/microplugin/src/microplugin.js') }}"></script>
+<script src="{{ asset('assets/vendor/sifter/sifter.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/selectize/dist/js/selectize.min.js') }}"></script>
+<script src="{{ asset('assets/js/post-editor.js') }}"></script>
+
+<span class="hidden" id="editor-type">{{ e_type }}</span>
+<span class="hidden" id="editor-blog-id">{{ e_blog.id }}</span>
+<span class="hidden" id="editor-current-id">{% if e_type == 'update' %}{{ e_post.id }}{% endif %}</span>
+
+<h1>{{ e_blog.title }}</h1>
+<h2>{{ e_title }}</h2>
+<span class="pull-right">
+    {% if e_type == 'create' %}
+        <button type="button" class="btn btn-success" id="btn-submit" data-loading-text="saving...">
+            Save
+        </button>
+    {% else %}
+        <button type="button" class="btn btn-warning" id="btn-submit" data-loading-text="saving...">
+            Update
+        </button>
+    {% endif %}
+</span>
+
+<div class="row">
+    <div class="col-lg-8">
+
+        <style type="text/css" media="screen">
+            #excerpt-editor {
+                 min-height: 100px;
+             }
+         </style>
+
+        <form>
+            <textarea id="ckeditor" rows="20" cols="80">{{ e_post.content|default('')|raw }}</textarea>
+                <script>
+                    var editor = CKEDITOR.replace('ckeditor');
+                </script>
+            <div class="form-group">
+                <h3>Excerpt</h3>
+                <div id="excerpt-editor">{{ e_post.excerpt|default('') }}</div>
+            </div>
+        </form>
+
+    </div>
+    <div class="col-lg-4">
+
+        <form>
+            <div class="form-group">
+                <label for="input-title">Title</label>
+                <input class="form-control" id="input-title" type="text" placeholder="Title" value="{{ e_post.title|default('') }}">
+            </div>
+            <div class="form-group">
+                <label for="input-image">Main Image</label>
+                <input class="form-control" id="input-image" type="text" placeholder="Image URL" value="{{ e_post.mainImageUrl|default('') }}">
+                <br>
+                <img style="height: 80px;" id="main-image-preview" src="{{ e_post.mainImageUrl|default('https://placehold.it/800x500?text=Preview') }}">
+            </div>
+            {% if e_post is not null %}
+                <div class="form-group">
+                    <label for="input-image">Publish Date</label>
+                    <input class="form-control" id="input-date" type="text" placeholder="Publish Date" value="{{ e_post.publishDate|date('d.m.Y') }}">
+                </div>
+            {% endif %}
+            <div class="form-group">
+                <label for="sel-tags">Tags</label>
+                <select id="sel-tags"
+                        data-placeholder="Choose a Tag..."
+                        multiple>
+                    <option value=""></option>
+
+                    {% if e_post is not null and e_post.tags|length > 0 %}
+                        <optgroup label="Linked">
+                            {% for tag in e_post.tags %}
+                                <option value="{{ tag.title }}" selected>{{ tag.title }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    {% endif %}
+
+                    <optgroup label="Available">
+                        {% for tag in tags %}
+                            <option value="{{ tag.title }}">{{ tag.title }}</option>
+                        {% endfor %}
+                    </optgroup>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Options</label>
+                <div class="checkbox">
+                    <label>
+                        <input id="cb-published" type="checkbox" data-toggle="toggle"
+                            {% if e_post.published|default(false) %}checked{% endif %}> Published?
+                    </label>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

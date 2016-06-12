@@ -1,0 +1,43 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Blogs{% endblock %}
+
+{% block currentPage %}blogs{% endblock %}
+
+{% block content %}
+
+    <span class="pull-right">
+        <a href="{{ path('backend_blogs_create') }}" class="btn btn-success">
+            <i class="fa fa-plus"></i>
+            Add a Blog
+        </a>
+    </span>
+
+    <h1>Blogs</h1>
+
+    <table class="table table-bordered" style="background-color: #ffffff;">
+        {% for blog in blogs %}
+            <tr>
+                <td>
+                    <a href="{{ path('backend_blogs_posts', {blogId: blog.id}) }}">
+                        <h4>{{ blog.title }}</h4>
+                    </a>
+                </td>
+                <td class="text-center" style="font-size: 22px; padding-top: 12px;">
+                    <a class="text-warning" href="{{ path('backend_blogs_update', {blogId: blog.id}) }}">
+                        <i class="fa fa-edit"></i>
+                        Edit
+                    </a>
+                    {% if blog.posts|length == 0 %}
+                        &middot;
+                        <a class="text-danger" href="{{ path('backend_blogs_delete', {blogId: blog.id}) }}">
+                            <i class="fa fa-trash"></i>
+                            Delete
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

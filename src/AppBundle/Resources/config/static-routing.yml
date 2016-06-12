@@ -1,0 +1,9 @@
+#default post route
+_post:
+    path:       /post/{slug}
+    defaults:   { _controller: AppBundle:Page:post }
+
+#search
+_search_results:
+    path:       /search
+    defaults:   { _controller: AppBundle:Page:search }

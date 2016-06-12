@@ -1,0 +1,39 @@
+parameters:
+    twig.extension.routing.class: AppBundle\Twig\CustomRoutingExtension
+
+services:
+    app.dyn_route_loader:
+        class: AppBundle\Service\DynamicRouter
+        arguments:
+            - "@doctrine"
+        tags:
+            - { name: routing.loader }
+    app.backend.page:
+        class: BackendBundle\Service\PageService
+        arguments:
+            - "@app.repo.page"
+            - "@doctrine.orm.default_entity_manager"
+
+    #repositories
+    app.repo.page:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
+        arguments:
+            - "DataBundle:Page"
+
+    #twig
+    app.twig.appextension:
+        class: AppBundle\Twig\AppExtension
+        tags:
+            - { name: twig.extension }
+        arguments:
+            - "@doctrine"
+    twig.extension.stringloader:
+        class: Twig_Extension_StringLoader
+        tags:
+            - { name: 'twig.extension' }
+    twig.extension.routing:
+        class: '%twig.extension.routing.class%'
+        public: false
+        arguments:
+            - "@router"

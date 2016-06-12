@@ -1,0 +1,139 @@
+# backend_dash:
+#     path:       /
+#     defaults:   { _controller: BackendBundle:App:dashboard }
+
+backend_dash:
+    path:       /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: backend_pages
+        permanent: true
+
+#pages
+backend_pages:
+    path:       /pages
+    defaults:   { _controller: BackendBundle:Page:collection }
+
+backend_pages_create:
+    path:       /pages/create
+    defaults:   { _controller: BackendBundle:Page:create }
+
+backend_pages_update:
+    path:       /pages/{pageId}/edit
+    defaults:   { _controller: BackendBundle:Page:update }
+
+backend_pages_delete:
+    path:       /pages/{pageId}/delete
+    defaults:   { _controller: BackendBundle:Page:delete }
+
+backend_pages_active:
+    path:       /pages/{pageId}/_active
+    defaults:   { _controller: BackendBundle:Page:toggleActive }
+
+backend_pages_hidden:
+    path:       /pages/{pageId}/_hidden
+    defaults:   { _controller: BackendBundle:Page:toggleHidden }
+
+backend_pages_index:
+    path:       /pages/{pageId}/_index
+    defaults:   { _controller: BackendBundle:Page:toggleIndex }
+
+backend_pages_move_up:
+    path:       /pages/{pageId}/_up
+    defaults:   { _controller: BackendBundle:Page:moveUp }
+
+backend_pages_move_down:
+    path:       /pages/{pageId}/_down
+    defaults:   { _controller: BackendBundle:Page:moveDown }
+
+#blogs
+backend_blogs:
+    path:       /blogs
+    defaults:   { _controller: BackendBundle:Blog:collection }
+
+backend_blogs_create:
+    path:       /blogs/create
+    defaults:   { _controller: BackendBundle:Blog:create }
+
+backend_blogs_update:
+    path:       /blogs/{blogId}/edit
+    defaults:   { _controller: BackendBundle:Blog:update }
+
+backend_blogs_delete:
+    path:       /blogs/{blogId}/delete
+    defaults:   { _controller: BackendBundle:Blog:delete }
+
+backend_blogs_posts:
+    path:       /blogs/{blogId}/posts
+    defaults:   { _controller: BackendBundle:Blog:postsCollection }
+
+backend_blogs_posts_search:
+    path:       /blogs/{blogId}/posts/search
+    defaults:   { _controller: BackendBundle:Blog:postsSearch }
+
+backend_blogs_posts_create:
+    path:       /blogs/{blogId}/posts/create
+    defaults:   { _controller: BackendBundle:Blog:postsCreate }
+
+backend_blogs_posts_update:
+    path:       /blogs/{blogId}/posts/{postId}/edit
+    defaults:   { _controller: BackendBundle:Blog:postsUpdate }
+
+backend_blogs_posts_delete:
+    path:       /blogs/{blogId}/posts/{postId}/delete
+    defaults:   { _controller: BackendBundle:Blog:postsDelete }
+
+backend_blogs_posts_published:
+    path:       /blogs/{blogId}/posts/{postId}/_published
+    defaults:   { _controller: BackendBundle:Blog:postsTogglePublished }
+
+#tags
+backend_tags:
+    path:       /tags
+    defaults:   { _controller: BackendBundle:Tag:collection }
+
+backend_tags_update:
+    path:       /tags/{tagId}/update
+    defaults:   { _controller: BackendBundle:Tag:update }
+
+backend_tags_delete:
+    path:       /tags/{tagId}/delete
+    defaults:   { _controller: BackendBundle:Tag:delete }
+
+#settings
+backend_settings:
+    path:       /settings
+    defaults:   { _controller: BackendBundle:Setting:collection }
+
+backend_settings_create:
+    path:       /settings/create
+    defaults:   { _controller: BackendBundle:Setting:create }
+
+backend_settings_update:
+    path:       /settings/{settingId}/update
+    defaults:   { _controller: BackendBundle:Setting:update }
+
+backend_settings_delete:
+    path:       /settings/{settingId}/delete
+    defaults:   { _controller: BackendBundle:Setting:delete }
+
+#partials
+backend_partials:
+    path:       /partials
+    defaults:   { _controller: BackendBundle:Partial:collection }
+
+backend_partials_create:
+    path:       /partials/create
+    defaults:   { _controller: BackendBundle:Partial:create }
+
+backend_partials_update:
+    path:       /partials/{partialId}/edit
+    defaults:   { _controller: BackendBundle:Partial:update }
+
+backend_partials_delete:
+    path:       /partials/{partialId}/delete
+    defaults:   { _controller: BackendBundle:Partial:delete }
+
+backend_partials_active:
+    path:       /partials/{partialId}/_active
+    defaults:   { _controller: BackendBundle:Partial:toggleActive }

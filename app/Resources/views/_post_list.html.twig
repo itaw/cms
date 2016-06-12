@@ -1,0 +1,66 @@
+{% for post in posts %}
+
+    {% if post.published %}
+
+        {% set longPost = (post.excerpt|length == 0) %}
+
+        {% if page is defined %}
+            {% set postUrl = path((page.title|lower) ~ '_post', {slug: post.slug}) %}
+        {% else %}
+            {% set postUrl = path('_post', {slug: post.slug}) %}
+        {% endif %}
+
+        {% set image = post.mainImageUrl %}
+        {% if 'http' not in image %}
+            {% set image = asset(post.mainImageUrl) %}
+        {% endif %}
+
+        <div class="vnd-entry">
+            <div class="media">
+                {% if image|length > 0 and longPost == false %}
+                    <div class="media-left hidden-xs">
+                        <a href="{{ path('_post', {slug: post.slug}) }}">
+                            <img class="media-object" src="{{ image }}">
+                        </a>
+                    </div>
+                {% endif %}
+                <div class="media-body">
+                    <span class="pull-right vnd-entry-date">{{ post.publishDate|date('d.m.Y') }}</span>
+
+                    <h1 class="vnd-section-headline">
+                        <a href="{{ postUrl }}">
+                            {{ post.title|raw }}
+                        </a>
+                    </h1>
+
+                    <!-- tags -->
+                    <h5>
+                        {% for tag in post.tags %}
+                            #{{ tag.title }}
+                        {% endfor %}
+                    </h5>
+
+                    {% if longPost %}
+                        <div class="vnd-post">
+                            {% if post.isMarkdown %}
+                                {{ include(template_from_string(post.content|raw))|markdown|raw  }}
+                            {% else %}
+                                {{ include(template_from_string(post.content|raw))|raw }}
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="vnd-excerpt">
+                            {{ post.excerpt|raw }}
+                        </div>
+
+                        <br>
+
+                        <a href="{{ postUrl }}">Read More</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endfor %}

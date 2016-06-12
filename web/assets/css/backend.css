@@ -1,0 +1,23 @@
+/**
+ * (c) StaticAge Magazine
+ *
+ * @author Florian Weber <fweber@weber-elektronik.de>
+ */
+
+/**
+ * general
+ */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #eeeeee;
+    padding-top: 70px;
+}
+
+.tab-content {
+    background-color: #ffffff;
+    padding: 12px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}

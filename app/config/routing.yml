@@ -1,0 +1,19 @@
+app:
+    resource:   .
+    type:       dynamic
+    prefix:     /
+    options:
+        expose: true
+
+backend:
+    resource: "@BackendBundle/Resources/config/routing.yml"
+    prefix:   /backend
+    options:
+        expose: true
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix:   /backend
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

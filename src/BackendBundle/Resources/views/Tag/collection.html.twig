@@ -1,0 +1,40 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Tags{% endblock %}
+
+{% block currentPage %}tags{% endblock %}
+
+{% block content %}
+
+    <h1>Tags</h1>
+
+    <div class="alert alert-info">
+        To remove Tags already used in Blogposts, remove them from the Post first!
+    </div>
+
+    <table class="table table-bordered" style="background-color: #ffffff;">
+        {% for tag in tags %}
+            <tr>
+                <td>#{{ tag.title }}</td>
+                <td><pre><code>{{ tag.slug }}</code></pre></td>
+                <td>
+                    Used in <span class="badge">{{ tag.posts|length }}</span> Blog Posts
+                </td>
+                <td class="text-right">
+                    {% if tag.posts|length == 0 %}
+                        <a class="btn btn-danger btn-xs" href="{{ path('backend_tags_delete', {tagId: tag.id}) }}">
+                            <i class="fa fa-trash"></i>
+                            Delete
+                        </a>
+                    {% endif %}
+
+                    <a class="btn btn-warning btn-xs" href="{{ path('backend_tags_update', {tagId: tag.id}) }}">
+                        <i class="fa fa-edit"></i>
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

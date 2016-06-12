@@ -1,0 +1,31 @@
+<ul class="vnd-recent-posts">
+    {% for post in posts %}
+
+        {% set image = post.mainImageUrl %}
+        {% if 'http' not in image %}
+            {% set image = asset(post.mainImageUrl) %}
+        {% endif %}
+
+        <li>
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a href="{{ path('_post', {slug: post.slug}) }}">{{ post.title|raw }}</a>
+                    </h4>
+                    posted on {{ post.publishDate|date('d.m.Y') }}
+                    <br>
+                    {% for tag in post.tags %}
+                        #{{ tag.slug }}
+                    {% endfor %}
+                </div>
+                {% if image|length > 0 %}
+                    <div class="media-right">
+                        <a href="{{ path('_post', {slug: post.slug}) }}">
+                            <img class="media-object" src="{{ image }}">
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+</ul>

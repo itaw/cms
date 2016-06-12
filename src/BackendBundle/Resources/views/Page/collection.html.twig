@@ -1,0 +1,101 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Pages{% endblock %}
+
+{% block currentPage %}pages{% endblock %}
+
+{% block content %}
+
+    <span class="pull-right">
+        <a href="{{ path('backend_pages_create') }}" class="btn btn-success">
+            <i class="fa fa-plus"></i>
+            Add a Page
+        </a>
+    </span>
+
+    <h1>Pages</h1>
+
+    <table class="table table-bordered" style="background-color: #ffffff;">
+        {% for page in pages %}
+            <tr class="{% if page.parent is not null %}info{% endif %}">
+                <td>
+                    {% if page.parent is not null %}
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    {% endif %}
+                    <strong>{{ page.title }}</strong>
+                    {% if page.parent is not null %}
+                        <small class="pull-right">(Child of {{ page.parent.title }})</small>
+                    {% endif %}
+                    <br>
+                    {{ page.metaTitle }}
+                </td>
+                <td style="padding-top: 17px;">
+                    <code>/{{ page.slug }}</code>
+                </td>
+                <td style="padding-top: 17px;">
+                    {% if page.isBlog %}
+                        <span class="label label-default">Blog</span>
+                    {% elseif page.isBlogTag %}
+                        <span class="label label-default">Tag</span>
+                    {% else %}
+                        <span class="label label-default">Page</span>
+                    {% endif %}
+                </td>
+                <td class="text-center" style="font-size: 22px; padding-top: 12px;">
+                    <a href="{{ path('backend_pages_index', {pageId: page.id}) }}">
+                        {% if page.isIndex %}
+                            <i class="fa fa-home" style="color: #87D37C;"></i>
+                        {% else %}
+                            <i class="fa fa-home" style="color: #EF4836;"></i>
+                        {% endif %}
+                    </a>
+                </td>
+                <td class="text-center" style="font-size: 22px; padding-top: 12px;">
+                    <a href="{{ path('backend_pages_active', {pageId: page.id}) }}">
+                        {% if page.active %}
+                            <i class="fa fa-check-circle-o" style="color: #87D37C;"></i>
+                        {% else %}
+                            <i class="fa fa-times-circle-o" style="color: #EF4836;"></i>
+                        {% endif %}
+                    </a>
+                </td>
+                <td class="text-center" style="font-size: 22px; padding-top: 12px;">
+                    <a href="{{ path('backend_pages_hidden', {pageId: page.id}) }}">
+                        {% if page.hidden %}
+                            <i class="fa fa-eye-slash" style="color: #EF4836;"></i>
+                        {% else %}
+                            <i class="fa fa-eye" style="color: #87D37C;"></i>
+                        {% endif %}
+                    </a>
+                </td>
+                <td class="text-center" style="font-size: 22px; padding-top: 12px;">
+                    <a class="text-warning" href="{{ path('backend_pages_update', {pageId: page.id}) }}">
+                        <i class="fa fa-edit"></i>
+                        Edit
+                    </a>
+                    &middot;
+                    <a class="text-danger" href="{{ path('backend_pages_delete', {pageId: page.id}) }}">
+                        <i class="fa fa-trash"></i>
+                        Delete
+                    </a>
+                </td>
+                <td>
+                    {% if page.parent is null %}
+                        <a class="btn btn-default btn-xs"
+                            href="{{ path('backend_pages_move_up', {pageId: page.id}) }}"
+                            {% if page.ordering == 0 %}disabled{% endif %}>
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <br>
+                        <a class="btn btn-default btn-xs"
+                            href="{{ path('backend_pages_move_down', {pageId: page.id}) }}"
+                            {% if page.ordering == (pages|length - 1) %}disabled{% endif %}>
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

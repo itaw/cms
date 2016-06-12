@@ -1,0 +1,51 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Partials{% endblock %}
+
+{% block currentPage %}partials{% endblock %}
+
+{% block content %}
+
+    <span class="pull-right">
+        <a href="{{ path('backend_partials_create') }}" class="btn btn-success">
+            <i class="fa fa-plus"></i>
+            Add a Partial
+        </a>
+    </span>
+
+    <h1>Partials</h1>
+
+    <table class="table table-bordered" style="background-color: #ffffff;">
+        {% for partial in partials %}
+            <tr>
+                <td>
+                    <h4>{{ partial.title }}</h4>
+                </td>
+                <td>
+                    <h4><code>{% verbatim %}{{ render_partial('{% endverbatim %}{{ partial.title }}{% verbatim %}') }}{% endverbatim %}</code></h4>
+                </td>
+                <td class="text-center" style="font-size: 22px; padding-top: 12px;">
+                    <a href="{{ path('backend_partials_active', {partialId: partial.id}) }}" id="btn-toggle-active-state">
+                        {% if partial.active %}
+                            <i class="fa fa-check-circle-o" style="color: #87D37C;"></i>
+                        {% else %}
+                            <i class="fa fa-times-circle-o" style="color: #EF4836;"></i>
+                        {% endif %}
+                    </a>
+                </td>
+                <td class="text-center" style="font-size: 22px; padding-top: 12px;">
+                    <a class="text-warning" href="{{ path('backend_partials_update', {partialId: partial.id}) }}">
+                        <i class="fa fa-edit"></i>
+                        Edit
+                    </a>
+                    &middot;
+                    <a class="text-danger" href="{{ path('backend_partials_delete', {partialId: partial.id}) }}">
+                        <i class="fa fa-trash"></i>
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

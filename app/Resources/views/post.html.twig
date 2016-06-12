@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% if post.title|length > 0 %}
+    {% block title %}{{ parent() }} | Blog | {{ post.title }}{% endblock %}
+{% endif %}
+
+{% block ogp %}
+    {% set image = post.mainImageUrl %}
+    {% if 'http' not in image %}
+        {% set image = absolute_url(asset(post.mainImageUrl)) %}
+    {% endif %}
+
+    <meta property="og:title" content="{{ post.title }} | {{ get_setting('page_title') }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ url('_post', {slug: post.slug}) }}" />
+    <meta property="og:image" content="{{ image|default('') }}" />
+{% endblock %}
+
+{% block content %}
+
+    <span class="pull-right vnd-entry-date">
+        posted on
+        {{ post.publishDate|date('d.m.Y') }}
+    </span>
+    <h1>{{ post.title }}</h1>
+
+    <div class="vnd-post">
+        {% if post.isMarkdown %}
+            {{ include(template_from_string(post.content|raw))|markdown|raw }}
+        {% else %}
+            {{ include(template_from_string(post.content|raw))|raw }}
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <div class="vnd-post-social">
+        <h3>Share this Post in your Social Networks</h3>
+
+        <div class="fb-share-button" data-href="{{ url('_post', {slug: post.slug}) }}" data-layout="button_count" data-mobile-iframe="true"></div>
+        <a href="https://twitter.com/share" target="_blank" class="twitter-share-button" data-url="{{ url('_post', {slug: post.slug}) }}">
+            <i class="fa fa-twitter"></i>
+            Tweet
+        </a>
+        <!-- <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script> -->
+    </div>
+
+{% endblock %}

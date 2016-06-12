@@ -1,0 +1,55 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ parent() }} | Search Results for '{{ app.request.get('q') }}'{% endblock %}
+
+{% block content %}
+
+    <h1>Search Results for '{{ app.request.get('q') }}'</h1>
+
+    <h2>Pages</h2>
+
+    {% if pages|length > 0 %}
+
+        <ul>
+            {% for page in pages %}
+                <li>
+                    <div>
+                        <h3>
+                            <a href="{{ path(page.title|lower) }}">
+                                {{ page.title }}
+                            </a>
+                        </h3>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+        <div class="heads-up heads-up-danger">
+            <h4>
+                <i class="fa fa-meh-o" aria-hidden="true"></i>
+                Sorry, we couldn't find any Pages with your search parameters!
+            </h4>
+        </div>
+
+    {% endif %}
+
+    <h2>Posts</h2>
+
+    {% if posts|length > 0 %}
+
+        {{ include('_post_list.html.twig') }}
+
+    {% else %}
+
+        <div class="heads-up heads-up-danger">
+            <h4>
+                <i class="fa fa-meh-o" aria-hidden="true"></i>
+                Sorry, we couldn't find any Posts with your search parameters!
+            </h4>
+        </div>
+
+    {% endif %}
+
+{% endblock %}

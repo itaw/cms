@@ -1,0 +1,256 @@
+/**
+ * (c) StaticAge Magazine
+ *
+ * @author Florian Weber <fweber@weber-elektronik.de>
+ */
+
+/**
+ * general
+ */
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+}
+
+@media (max-width: 767px) {
+    body {
+        padding-top: 50px;
+    }
+}
+
+/**
+ * header
+ */
+
+.vnd-header {
+    padding-top: 12px;
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: overlay;
+    padding-bottom: 17px;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.vnd-header-small {
+    height: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99999;
+    display: none;
+    background-color: #111111;
+    border-bottom: 5px solid #ffffff;
+}
+
+.vnd-logo img {
+    width: 100%;
+}
+
+/**
+ * nav
+ */
+
+.vnd-nav {
+    text-align: right;
+}
+
+.vnd-nav ul {
+    list-style: none;
+    padding: 0;
+    padding-top: 28px;
+}
+
+.vnd-nav ul li {
+    display: inline;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.7em;
+    padding-left: 12px;
+    padding-right: 10px;
+}
+
+.vnd-nav ul li a:link, .vnd-nav ul li a:visited, .vnd-nav ul li a:active {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.vnd-nav ul li a:hover, .vnd-nav ul li.active a:link, .vnd-nav ul li.active a:visited {
+    color: #00FF00;
+    text-decoration: none;
+}
+
+.vnd-nav ul li.active {
+    border-bottom: 3px solid #00FF00;
+}
+
+/**
+ * sidebar
+ */
+
+.vnd-sidebar h1 {
+    font-size: 1.7em;
+}
+
+.vnd-sidebar img {
+    margin-bottom: 3px;
+}
+
+/*.vnd-sidebar div {
+    padding-top: 19px;
+    padding-bottom: 19px;
+}*/
+
+/**
+ * buttons
+ */
+
+.vnd-btn-big-border {
+    border: 4px solid;
+    border-radius: 6px;
+    font-size: 1.4em;
+}
+
+/**
+ * content
+ */
+
+.vnd-content {
+    padding-top: 19px;
+}
+
+h1.vnd-section-headline {
+    font-size: 1.7em;
+}
+
+.vnd-content a:link, .vnd-content a:visited {
+    color: #00B500;
+}
+
+/*entry*/
+.vnd-entry {
+    font-size: 1.2em;
+    margin-bottom: 19px;
+}
+
+.vnd-entry .media-object {
+    width: 260px;
+    margin-top: 19px;
+}
+
+.vnd-entry-date::before {
+    content: '//';
+    font-size: 1.2em;
+    padding-right: 6px;
+    font-weight: 500;
+    color: #00FF00;
+}
+
+/*post*/
+.vnd-post {
+    font-size: 1.2em;
+}
+
+.vnd-post img {
+    max-height: 250px;
+    margin: 2px;
+    display: inline-block;
+}
+
+/**
+ * footer
+ */
+
+.vnd-footer {
+    padding-bottom: 19px;
+    font-size: 1.4em;
+    font-weight: 500;
+    text-align: center;
+}
+
+.vnd-recent-posts h1 {
+    font-size: 1.4em;
+}
+
+.vnd-recent-posts {
+    list-style: none;
+    padding: 0;
+}
+
+.vnd-recent-posts li {
+    background-color: rgba(1, 1, 1, 0.1);
+    padding-left: 12px;
+    padding-top: 19px;
+    padding-bottom: 19px;
+    margin-top: 6px;
+}
+
+.vnd-recent-posts li img {
+    width: 120px;
+    margin-top: 0;
+    margin-right: 12px;
+}
+
+.vnd-h-special::before {
+    content: '//';
+    padding-right: 6px;
+    font-weight: 500;
+    color: #00FF00;
+}
+
+.slick img {
+    width: 100%;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: #00ff00;
+    border-color: #00ff00;
+}
+
+/**
+ * HEADS UP
+ */
+
+.heads-up {
+    background-color: #EEEEEE;
+    border-left: 5px solid #AAAAAA;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 13px;
+    padding-right: 15px;
+    margin-bottom: 10px;
+}
+
+.heads-up-reverse {
+    background-color: #EEEEEE;
+    border-right: 5px solid #AAAAAA;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 13px;
+    padding-right: 15px;
+    margin-bottom: 10px;
+}
+
+.heads-up-success {
+    background-color: #f4f8fa;
+    border-color: #5cb85c;
+}
+
+.heads-up-warning {
+    background-color: #fcf8f2;
+    border-color: #f0ad4e;
+}
+
+.heads-up-danger {
+    background-color: #fdf7f7;
+    border-color: #d9534f;
+}
+
+.heads-up-info {
+    background-color: #f4f8fa;
+    border-color: #5bc0de;
+}

@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% if page.metaTitle|length > 0 %}
+    {% block title %}{{ parent() }} | {{ page.metaTitle }}{% endblock %}
+{% endif %}
+
+{% block content %}
+
+    {% if page.enableTwig %}
+        {{ include(template_from_string(page.content|raw)) }}
+    {% else %}
+        {{ page.content|raw }}
+    {% endif %}
+
+{% endblock %}

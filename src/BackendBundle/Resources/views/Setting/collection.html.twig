@@ -1,0 +1,43 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Settings{% endblock %}
+
+{% block currentPage %}settings{% endblock %}
+
+{% block content %}
+
+    <span class="pull-right">
+        <a href="{{ path('backend_settings_create') }}" class="btn btn-success">
+            <i class="fa fa-plus"></i>
+            Add a Setting
+        </a>
+    </span>
+
+    <h1>Settings</h1>
+
+    <table class="table table-bordered" style="background-color: #ffffff;">
+        {% for setting in settings %}
+            <tr>
+                <td>{{ setting.settingKey }}</td>
+                <td>
+                    {% if setting.isDeep %}
+                        <pre><code>{{ setting.settingValue }}</code></pre>
+                    {% else %}
+                        {{ setting.settingValue }}
+                    {% endif %}
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning btn-xs" href="{{ path('backend_settings_update', {settingId: setting.id}) }}">
+                        <i class="fa fa-edit"></i>
+                        Edit
+                    </a>
+                    <a class="btn btn-danger btn-xs" href="{{ path('backend_settings_delete', {settingId: setting.id}) }}">
+                        <i class="fa fa-trash"></i>
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

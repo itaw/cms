@@ -1,0 +1,136 @@
+<script src="{{ asset('assets/js/page-editor.js') }}"></script>
+
+<span class="hidden" id="editor-type">{{ e_type }}</span>
+<span class="hidden" id="editor-current-id">{% if e_type == 'update' %}{{ page.id }}{% endif %}</span>
+
+<h1>{{ e_title }}</h1>
+<span class="pull-right">
+    {% if e_type == 'create' %}
+        <button type="button" class="btn btn-success" id="btn-submit" data-loading-text="saving...">
+            Save
+        </button>
+    {% else %}
+        <button type="button" class="btn btn-warning" id="btn-submit" data-loading-text="saving...">
+            Update
+        </button>
+    {% endif %}
+</span>
+
+<div class="row">
+    <div class="col-lg-10">
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#content" aria-controls="content" role="tab" data-toggle="tab">Content</a>
+            </li>
+            <li role="presentation">
+                <a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">Meta</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="content">
+
+                <style type="text/css" media="screen">
+                    #editor {
+                        height: 500px;
+                    }
+                </style>
+
+                <form>
+                    <div class="form-group">
+                        <div id="editor">{{ e_page.content|default('') }}</div>
+                    </div>
+                </form>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="meta">
+
+                <form>
+                    <div class="form-group">
+                        <label for="input-meta-title">Meta Title</label>
+                        <input class="form-control" id="input-meta-title" type="text" placeholder="Meta Title" value="{{ e_page.metaTitle|default('') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-meta-description">Meta Description</label>
+                        <textarea class="form-control" id="input-meta-description">{{ e_page.metaDescription|default('') }}</textarea>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-2">
+
+        <form>
+            <div class="form-group">
+                <label for="input-title">Title</label>
+                <input class="form-control" id="input-title" type="text" placeholder="Title" value="{{ e_page.title|default('') }}">
+            </div>
+            <div class="form-group">
+                <label for="input-slug">Slug</label>
+                <input class="form-control" id="input-slug" type="text" placeholder="Slug" value="{{ e_page.slug|default('') }}">
+            </div>
+            <div class="form-group">
+                <label for="sel-blog">Display a Blog on the Page?</label>
+                <select class="form-control" id="sel-blog">
+                    <option value="0">Please select</option>
+                    {% for blog in blogs %}
+                        <option value="{{ blog.id }}"
+                            {% if page.blog.id|default(0) == blog.id %}selected{% endif %}>
+                            {{ blog.title }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sel-tag">Display a Tag on the Page?</label>
+                <select class="form-control" id="sel-tag">
+                    <option value="0">Please select</option>
+                    {% for tag in tags %}
+                        <option value="{{ tag.id }}"
+                            {% if page.tag.id|default(0) == tag.id %}selected{% endif %}>
+                            {{ tag.title }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            {#
+            {% if e_type == 'create' %}
+                <div class="form-group">
+                    <label for="sel-parent">Will this be a Sub-Page? Select the Parent</label>
+                    <select class="form-control" id="sel-parent">
+                        <option value="0">Please select</option>
+                        {% for parent in all_pages %}
+                            <option value="{{ parent.id }}">
+                                {{ parent.title }}
+                                &middot;
+                                /{{ parent.slug }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% endif %}
+            #}
+
+            <div class="form-group">
+                <label>Options</label>
+                <div class="checkbox">
+                    <label>
+                        <input id="cb-active" type="checkbox" data-toggle="toggle"
+                            {% if page.active|default(false) %}checked{% endif %}> Active?
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input id="cb-hidden" type="checkbox" data-toggle="toggle"
+                            {% if page.hidden|default(false) %}checked{% endif %}> Hidden?
+                    </label>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

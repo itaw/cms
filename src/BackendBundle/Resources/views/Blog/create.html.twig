@@ -1,0 +1,33 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Create Blog{% endblock %}
+
+{% block currentPage %}blogs{% endblock %}
+
+{% block content %}
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Create Blog</h3>
+        </div>
+        <div class="panel-body">
+
+            <form method="post">
+                <div class="form-group">
+                    <label for="input-title">Title</label>
+                    <input type="text"
+                        class="form-control"
+                        id="input-title"
+                        placeholder="Title"
+                        name="title">
+                </div>
+
+                <input type="hidden" value="1" name="sent">
+
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

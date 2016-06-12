@@ -1,0 +1,15 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Partials &middot; Create{% endblock %}
+
+{% block currentPage %}partials{% endblock %}
+
+{% block content %}
+
+    {{ include('BackendBundle:Partial:_partial_editor.html.twig', {
+        e_title: 'Create Partial',
+        e_type: 'create',
+        e_partial: null
+    }) }}
+
+{% endblock %}

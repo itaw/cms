@@ -1,0 +1,16 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Post &middot; Create{% endblock %}
+
+{% block currentPage %}blogs{% endblock %}
+
+{% block content %}
+
+    {{ include('BackendBundle:Blog:_post_editor.html.twig', {
+        e_title: 'Create Post',
+        e_type: 'create',
+        e_blog: blog,
+        e_post: null
+    }) }}
+
+{% endblock %}

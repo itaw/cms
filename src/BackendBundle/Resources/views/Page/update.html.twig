@@ -1,0 +1,15 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Pages &middot; Update{% endblock %}
+
+{% block currentPage %}pages{% endblock %}
+
+{% block content %}
+
+    {{ include('BackendBundle:Page:_page_editor.html.twig', {
+        e_title: 'Edit Page',
+        e_type: 'update',
+        e_page: page
+    }) }}
+
+{% endblock %}

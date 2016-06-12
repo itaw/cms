@@ -1,0 +1,74 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Blogposts{% endblock %}
+
+{% block currentPage %}blogs{% endblock %}
+
+{% block content %}
+
+    <div class="well well-sm">
+        <form class="form-inline" method="get" action="{{ path('backend_blogs_posts_search', {blogId: blog.id}) }}">
+            <div class="form-group">
+                <input type="text" class="form-control" id="input-search-post" name="q" value="{{ app.request.get('q') }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Search Post</button>
+        </form>
+    </div>
+
+    <span class="pull-right">
+        <a href="{{ path('backend_blogs_posts_create', {blogId: blog.id}) }}" class="btn btn-success">
+            <i class="fa fa-plus"></i>
+            Add a Post
+        </a>
+    </span>
+
+    <h1><a href="{{ path('backend_blogs_posts', {blogId: blog.id}) }}">{{ blog.title }}</a></h1>
+    <h2>Searched Post Results</h2>
+
+    <table class="table table-bordered" style="background-color: #ffffff;">
+        {% for post in posts %}
+            <tr>
+                <td>
+                    {% if post.mainImageUrl|length > 0 %}
+                        <img class="pull-right" style="height: 80px;" src="{{ post.mainImageUrl }}">
+                    {% endif %}
+                    <strong>{{ post.title }}</strong>
+                    <br>
+                    Published at {{ post.publishDate|date('d.m.Y') }}
+                    {% if post.tags|length > 0 %}
+                        <br>
+                        {% for tag in post.tags %}
+                            #{{ tag.title }}
+                        {% endfor %}
+                    {% endif %}
+                    <br>
+                    <small>
+                        {{ post.excerpt|default('<i>- no excerpt -</i>')|raw }}
+                    </small>
+                </td>
+                <td class="text-center" style="font-size: 22px; padding-top: 12px;">
+                    <a href="{{ path('backend_blogs_posts_published', {blogId: blog.id, postId: post.id}) }}" id="btn-toggle-active-state">
+                        {% if post.published == false %}
+                            <i class="fa fa-bullhorn" style="color: #EF4836;"></i>
+                        {% else %}
+                            <i class="fa fa-bullhorn" style="color: #87D37C;"></i>
+                        {% endif %}
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-warning btn-sm" href="{{ path('backend_blogs_posts_update', {blogId: blog.id, postId: post.id}) }}">
+                        <i class="fa fa-edit"></i>
+                        Edit
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-danger btn-sm" href="{{ path('backend_blogs_posts_delete', {blogId: blog.id, postId: post.id}) }}">
+                        <i class="fa fa-trash"></i>
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

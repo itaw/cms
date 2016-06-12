@@ -1,0 +1,47 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Backend &middot; Dashboard{% endblock %}
+
+{% block content %}
+
+    <h1>Dashboard</h1>
+
+    <div class="row">
+        <div class="col-lg-6">
+
+            <!-- stats -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Stats</h3>
+                </div>
+                <div class="panel-body">
+                    Please visit
+                    <a href="https://analytics.google.com/analytics/web/" target="_blanks">Google Analytics</a>
+                    for Statistics!
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+
+            <!-- pages -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Pages</h3>
+                </div>
+                <div class="panel-body">
+                    Currently, {{ pages_total }} are defined, {{ pages_active }} are active
+
+                    <hr>
+
+                    <a href="{{ path('backend_pages_create') }}" class="btn btn-success">
+                        <i class="fa fa-plus"></i>
+                        Add a Page
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
