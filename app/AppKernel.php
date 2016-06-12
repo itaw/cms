@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Sentry\SentryBundle\SentryBundle(),
+            new Phylax\PhylaxTrackerBundle\PhylaxPhylaxTrackerBundle(),
             new AppBundle\AppBundle(),
             new BackendBundle\BackendBundle(),
             new DataBundle\DataBundle(),
