@@ -1,4 +1,7 @@
 {
+    "name": "itaw/cms",
+    "license": "MIT",
+    "type": "project",
     "autoload": {
         "psr-4": {
             "": "src/"
